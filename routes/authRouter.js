@@ -39,6 +39,7 @@ function login (req, res, next) {
   const { username, password } = req.body
   db('users')
     .where({ username })
+    .first()
     .then(user => {
       const isValid = bcrypt.compareSync(password, user.password)
       if (!user || !isValid) {
