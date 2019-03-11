@@ -1,10 +1,15 @@
-const express = require("express");
-const helmet = require("helmet");
-const cors = require("cors");
-const server = express();
+const express = require('express')
+const helmet = require('helmet')
+const logger = require('morgan')
+const cors = require('cors')
 
-server.use(cors());
-server.use(helmet());
-server.use(express.json());
+const server = express()
 
-module.exports = server;
+server.use(cors())
+server.use(helmet())
+server.use(logger('dev'))
+server.use(express.json())
+
+require('./routes')(server)
+
+module.exports = server
